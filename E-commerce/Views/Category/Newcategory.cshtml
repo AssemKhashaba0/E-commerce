@@ -1,0 +1,19 @@
+﻿<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Back button with icon -->
+            <button onclick="window.history.back()" class="btn btn-secondary mb-3">
+                <a href="/Category/index"><i class="fas fa-arrow-left"></i></a>  Back
+            </button>
+
+            <h2 class="text-center mb-4">Add New Category</h2>
+            <form action="/Category/Newcategory" method="post">
+                <div class="mb-3">
+                    <label for="newCategory" class="form-label">New Category</label>
+                    <input type="text" class="form-control" id="newCategory" placeholder="Enter category name" name="Name" required> 
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
