@@ -1,0 +1,60 @@
+﻿@model List<Category>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Back button with icon -->
+            <button onclick="window.history.back()" class="btn btn-secondary mb-3">
+                <a href="/Product/index"><i class="fas fa-arrow-left"></i></a> Back
+            </button>
+
+            <h2 class="text-center mb-4">Add New Product</h2>
+            <form action="/Product/Newc" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="productName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="productName" placeholder="Enter Product Name" name="Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="productDescription" placeholder="Enter Product Description" name="Description" required>
+                </div>
+                <div class="mb-3">
+                    <label for="productPrice" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="productPrice" placeholder="Enter Product Price" name="Price" required>
+                </div>
+                <div class="mb-3">
+                    <label for="productImage" class="form-label">Images</label>
+                    <input type="file" class="form-control" id="productImage" name="ImgUrl" required onchange="previewImage(event)">
+                </div>
+                <div class="mb-3">
+                    <img id="imagePreview" src="" alt="Selected Image" class="img-thumbnail" style="display: none; max-width: 200px;">
+                </div>
+                <label for="productImage" class="form-label">Category Name</label>
+
+                <select class="form-select" name="CategoryId">
+                    @foreach(var item in Model)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+
+                    }
+                </select>
+                <button type="submit" class="btn btn-primary w-20 m-2">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+
+        reader.onload = function () {
+            var img = document.getElementById('imagePreview');
+            img.src = reader.result;
+            img.style.display = 'block';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
