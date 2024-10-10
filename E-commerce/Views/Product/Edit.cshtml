@@ -1,0 +1,59 @@
+﻿@model Product
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Back button -->
+            <button onclick="window.history.back()" class="btn btn-secondary mb-3">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            
+            <h2 class="text-center mb-4">Edit Product: @Model.Name</h2>
+            <form action="/Product/Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" class="form-control" name="Id" value="@Model.Id">
+
+                <div class="mb-3">
+                    <label for="newProduct" class="form-label">New Product</label>
+                    <input type="text" class="form-control" id="newProduct" placeholder="Enter Product name" name="Name" value="@Model.Name">
+                </div>
+                <div class="mb-3">
+                    <label for="productDescription" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="productDescription" placeholder="Enter Product Description" name="Description" required value="@Model.Description">
+                </div>
+                <div class="mb-3">
+                    <label for="productPrice" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="productPrice" placeholder="Enter Product Price" name="Price" required value="@Model.Price">
+                </div>
+                <div class="mb-3">
+                    <label for="productImage" class="form-label">Images</label>
+                    <input type="file" class="form-control" id="productImage" name="ImgUrl"  onchange="previewImage(event)" value="~/images/@Model.ImgUrl">
+                </div>
+                <div class="mb-3">
+                    <img id="imagePreview" src="~/images/@Model.ImgUrl" alt="Selected Image" class="img-thumbnail" style="max-width: 200px;">
+                </div>
+                
+                <label for="productImage" class="form-label">Category Name</label>
+
+                <select class="form-select" name="CategoryId">
+                    @foreach (var item in ViewBag.allcategory)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('imagePreview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

@@ -46,9 +46,6 @@ namespace E_commerce.Controllers
             
              return RedirectToAction(nameof(Index));
 
-            
-
-
         }
         [HttpGet]
 
